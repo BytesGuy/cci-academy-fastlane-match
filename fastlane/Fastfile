@@ -1,0 +1,17 @@
+# fastlane/Fastfile
+default_platform :ios
+
+platform :ios do
+  before_all do
+    setup_circle_ci
+  end
+
+  desc "Run tests and build the app"
+  lane :testandbuild do
+    #scan
+    match(type: "adhoc")            # Set type of code signing required
+    gym(scheme: "HelloCircle",      # Set the scheme for your project here
+        export_method: "ad-hoc",
+        output_directory: "output") # Directory where signed .ipa file will be placed
+  end
+end
