@@ -1,0 +1,18 @@
+version: 2.1
+jobs:
+    test-and-build:
+        macos:
+            xcode: 11.4.0
+        steps:
+            - checkout
+            - run: bundle install
+            - run: bundle exec fastlane testandbuild
+            - store_artifacts:
+                path: output
+            - store_test_results:
+                path: output/scan
+
+workflows:
+    test-and-build-adhoc:
+        jobs:
+            - test-and-build
